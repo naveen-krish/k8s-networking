@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-node-affinity-2
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: failure-domain.k8s.io/zone
+            operator: In
+            values:
+            - zone2
+  nodeSelector:
+   ram: small
+  containers:
+  - name: with-node-affinity-2
+    image: k8s.gcr.io/pause:2.0

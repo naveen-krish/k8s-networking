@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: vol-ubuntu
+  name: vol-ubuntu
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: vol-ubuntu
+  template:
+    metadata:
+      labels:
+        run: vol-ubuntu
+    spec:
+      containers:
+      - image: ubuntu
+        name: vol-ubuntu
+        command: ["sleep","3600"]
+        volumeMounts:
+        - name: vol-pvc
+          mountPath: /data
+      restartPolicy: Always
+      volumes:
+       - name: vol-pvc
+         persistentVolumeClaim:
+          claimName: glusterfs-claim

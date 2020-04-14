@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: with-pod-anti-affinity
+spec:
+ selector:
+  matchLabels:
+   app: pause
+ replicas: 3
+ template:
+  metadata:
+   labels:
+    app: pause
+  spec:
+   affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+       - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values: 
+            - pause
+         topologyKey: kubernetes.io/hostname
+   containers:
+   - name: with-pod-anti-affinity
+     image: k8s.gcr.io/pause:2.0

@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    app: echosrv
+  name: echo-servername
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: echosrv
+  template:
+    metadata:
+      labels:
+        app: echosrv
+    spec:
+      containers:
+      - image: k8s.gcr.io/serve_hostname
+        name: echo-servername
+        ports:
+        - containerPort: 9376
+          protocol: TCP

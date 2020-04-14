@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memlimit-demo
+spec:
+  containers:
+  - name: memlimit
+    image: nginx
+    resources:
+      limits:
+        memory: "150Mi"

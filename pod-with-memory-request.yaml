@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memreq-demo
+spec:
+  containers:
+  - name: memreq
+    image: nginx
+    resources:
+      requests:
+        memory: "100Mi"
